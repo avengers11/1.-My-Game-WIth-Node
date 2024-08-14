@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jili - Fish</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0/css/bootstrap-grid.min.css" integrity="sha512-vWtGaoxGWtwzJnP6e3YbBCE2BAEbldcuL4TVO3IbW/IFocN/XxuBv3Fuqm7t+I4eZ7p8L9iBElSUqXQUbQmarA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <div class="contain">
+        <img src="/assets/jili-fish/1fe00ef14.e2f01.webp" alt="Jili Fish Image">
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0/js/bootstrap.min.js" integrity="sha512-Pv/SmxhkTB6tWGQWDa6gHgJpfBdIpyUy59QkbshS1948GRmj6WgZz18PaDMOqaEyKLRAvgil7sx/WACNGE4Txw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js" integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI" crossorigin="anonymous"></script>
+    <script>
+        const socket = io('http://localhost:3000/jili-fish');
+
+        // Listen for timer updates from the server
+        socket.on('timerUpdate', (currentTimer) => {
+            document.getElementById('timer').innerText = currentTimer;
+        });
+        
+
+        $("#submitForm").submit(function(e){
+            e.preventDefault();
+            let Amount = $("#BetAmount").val();
+            let winner = $("#winner").val();
+
+            let usersBet = {
+                "id" : $("#id").val(),
+                "amount" : Amount,
+                "winner" : winner
+            };
+
+            socket.emit("betInsert", usersBet);
+               
+            console.log(usersBet);
+        });
+
+        $(document).ready(function(){
+            let time = new Date().getTime()/1000;
+            $("#id").val(time);
+        });
+    </script>
+</body>
+</html>
