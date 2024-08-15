@@ -23,6 +23,8 @@ const io = socketIo(server, {
         credentials: true
     }
 });
+
+
 /*
 ===========================
     Fish Games Start
@@ -35,6 +37,20 @@ JiliFishService(io);
 /*
 ===========================
     Fish Games END
+===========================
+*/
+
+
+/*
+===========================
+    Ludo Game Start
+===========================
+*/
+const ludoRoutes = require('./routes/ludo');
+app.use('/lodu', ludoRoutes);
+/*
+===========================
+    Ludo Game END
 ===========================
 */
 
