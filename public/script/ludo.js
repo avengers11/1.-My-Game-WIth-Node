@@ -7,9 +7,10 @@ $(document).ready(function() {
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
-    // winnerResult
+    // winnerResult 
     var winnerResult = [];
     var winnerUsers = [];
+    var latestFiftyWinner = [];
     const myName = $("#user-name").val();
     const myImg = $("#user-img").val();
     const myId = Number($("#user-id").val());
@@ -45,10 +46,10 @@ $(document).ready(function() {
        "pic" : $("#user-img").val(),
        "amount" : $("#my-balance").val()
     });
-    socket.on('ludoActiveUsersShow', (data) => {
-        console.log(data);
+    socket.on('ludoActiveUsersShow', (data) => { 
         winnerResult = data.thisBoardWinner;
         winnerUsers = data.userBetsWinnerLudo;
+        latestFiftyWinner = data.latestFiftyWinner;
         const sortedData = data.allActiveUsers.sort((a, b) => b.amount - a.amount);
         let top3ByAmountDescLength = sortedData.slice(0, 3);
 
@@ -62,9 +63,8 @@ $(document).ready(function() {
                 `
         })
         $("div#activeUsers .modal-dialog .modal-content .modal-body .users-wrapper").html(mapData);
-
         // top 3
-        const mapDataTop3 = sortedData.map((curE) => {
+        const mapDataTop3 = top3ByAmountDescLength.map((curE) => {
             return `
                 <div class="user">
                     <img src="${curE.pic}" alt="">
@@ -74,6 +74,8 @@ $(document).ready(function() {
         })
         $("body .main-game-wrapper .main-part1 .top .bowel-wrapper .top-users").html(mapDataTop3);
 
+        // getWinnerResult
+        getWinnerResult();
 
     });
 
@@ -135,6 +137,7 @@ $(document).ready(function() {
 
         // getUserInfo
         if(time == 20){
+            getWinnerResult();
             getUserInfo(myId);
             getWinnerUsers();
         }
@@ -165,10 +168,10 @@ $(document).ready(function() {
         }
     });
     socket.on('ludoWinner', (event) => {
-        console.log(event);
         let winner = event.thisBoardWinner.winner;
         winnerResult = event.thisBoardWinner;
         winnerUsers = event.userBetsWinnerLudo;
+        latestFiftyWinner = event.latestFiftyWinner;
 
         $(".bet-lock-model").removeClass("active");
         $("body .main-game-wrapper .main-part1 .bottom .part2 .part2-middle .board, body .main-game-wrapper .main-part1 .bottom .part2 .part2-top .inner").addClass("active");
@@ -183,6 +186,8 @@ $(document).ready(function() {
     const betInsert = (this_elem) => {
         this_elem.addClass("active-coin");
 
+        
+
         // count board
         if ($("body .main-game-wrapper .main-part1 .bottom .part2 .part2-top .inner.active-coin").length > 2) {
             this_elem.removeClass("active-coin");
@@ -192,6 +197,11 @@ $(document).ready(function() {
         let board = this_elem.find("input.board").val();
         let amount = Number($("body .main-game-wrapper .main-part2 .part2 .bottom-middle .coins-wrapper .main-coin img").attr("amount"));
         let coin = $("body .main-game-wrapper .main-part2 .part2 .bottom-middle .coins-wrapper .main-coin img").attr("coin");
+
+        // check amount 
+        if(Number($("#my-balance").text()) < amount){
+            return false;
+        }
 
         let id = new Date().getTime()+1;
         let top = Number((Math.random() * 60) + 5).toFixed(0);
@@ -273,6 +283,41 @@ $(document).ready(function() {
         $("#pop-up-mywin").text(myData.amount);
     }
     getWinnerUsers();
+    
+    const getWinnerResult = () => {
+        let countRange4to10 = 0;
+        let countRange11to17 = 0;
+        latestFiftyWinner.forEach(item => {
+            if (item.number_winner >= 4 && item.number_winner <= 10) {
+                countRange4to10++;
+            } else if (item.number_winner >= 11 && item.number_winner <= 17) {
+                countRange11to17++;
+            }
+        });
+        let totalElements = latestFiftyWinner.length;
+        let percentage4to10 = (countRange4to10 / totalElements) * 100;
+        let percentage11to17 = (countRange11to17 / totalElements) * 100;
+        if(latestFiftyWinner.length > 0){
+            $("body .main-game-wrapper .main-part1 .top .bowel-wrapper .winnerRecord .mr-top .part1 p.right").text(percentage4to10.toFixed(0));
+            $("body .main-game-wrapper .main-part1 .top .bowel-wrapper .winnerRecord .mr-top .part2 p.right").text(percentage11to17.toFixed(0));
+        }
+        
+        
+        var sortTop9 = latestFiftyWinner.slice(0, 9);
+        const mapingData = sortTop9.map((curE, index) => {
+            return `
+            <div class="winner">
+                <p class="win small">${curE.number_winner}</p>
+                <div class="img">
+                    <img src="/assets/ludo/new-chokka-${curE.winner[0]}.png" alt="">
+                    <img src="/assets/ludo/new-chokka-${curE.winner[1]}.png" alt="">
+                    <img src="/assets/ludo/new-chokka-${curE.winner[2]}.png" alt="">
+                </div>
+            </div>
+            `;
+        })
+        $("body .main-game-wrapper .main-part1 .top .bowel-wrapper .winnerRecord .mr-bottom").html(mapingData);
+    }
 
     // ============ Get User Info =================
     const getUserInfo = (id) => {

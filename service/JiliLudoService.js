@@ -6,11 +6,12 @@ const { User, Ludo_Board_Data, Ludo_Bet_Insert } = require('../models');
 function setupSocket(io) {
     const JiliLudo = io.of('jili-ludo');
     
-    var thisBoardAmount = [ { amount: 500, board: 1 }, { amount: 100, board: 3 }, ]; //[ { amount: 500, board: 1 }, { amount: 500, board: 1 }, { amount: 500, board: 1 } ]
+    var thisBoardAmount = []; //[ { amount: 500, board: 1 }, { amount: 500, board: 1 }, { amount: 500, board: 1 } ]
     var userBetsLudo = [];
     var userBetsWinnerLudo = [];
     var thisBoardWinner = [];
     var allActiveUsers = [];
+    var latestFiftyWinner = [];
     var boardId = Number(new Date().getTime()/1000).toFixed(0);
 
     let timer = 5;
@@ -45,10 +46,20 @@ function setupSocket(io) {
                 // Rewards
                 winnerRewards();
 
-                // board insert 
-                boardInsert(boardId, thisBoardWinner.boardNumber);
+                // // board insert 
+                // boardInsert(boardId, thisBoardWinner.boardNumber);
+
+                // latest 20 winners 
+                latestFiftyWinner.unshift({
+                    winner: thisBoardWinner.winner,
+                    number_winner: thisBoardWinner.number_winner
+                });
+                if(latestFiftyWinner.length > 20){
+                    latestFiftyWinner.pop();
+                }
+
                 
-                JiliLudo.emit('ludoWinner',  {thisBoardWinner, userBetsWinnerLudo});
+                JiliLudo.emit('ludoWinner',  {thisBoardWinner, userBetsWinnerLudo, latestFiftyWinner});
 
                 // time reset
                 timer = 30;
@@ -222,7 +233,7 @@ function setupSocket(io) {
         socket.on("ludoActiveUsersConnect", (data) => {
             data['id'] = socket.id;
             allActiveUsers.push(data);
-            JiliLudo.emit("ludoActiveUsersShow", {allActiveUsers, thisBoardWinner, userBetsWinnerLudo});
+            JiliLudo.emit("ludoActiveUsersShow", {allActiveUsers, thisBoardWinner, userBetsWinnerLudo, latestFiftyWinner});
         });
 
         // users bet 
@@ -266,7 +277,7 @@ function setupSocket(io) {
             
             betInsert(userId, -amountInt);
 
-            Ludo_Bet_Insert.create({ user_id: userId, board_id: boardId,  amount: amountInt, board_number: boardInt});
+            // Ludo_Bet_Insert.create({ user_id: userId, board_id: boardId,  amount: amountInt, board_number: boardInt});
 
             // Show coin 
             JiliLudo.emit('ludoBetShow', event.coin);

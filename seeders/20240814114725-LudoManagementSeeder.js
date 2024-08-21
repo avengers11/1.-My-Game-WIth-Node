@@ -13,7 +13,7 @@ module.exports = {
      * }], {});
     */
 
-    await queryInterface.bulkInsert('ludo_manages', [{
+    await queryInterface.bulkInsert('Ludo_Manages', [{
       favicon: 'favicon.png',
       logo: 'logo.png',
       game_mod: true,
