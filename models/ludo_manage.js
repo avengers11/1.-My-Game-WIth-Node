@@ -18,10 +18,11 @@ module.exports = (sequelize, DataTypes) => {
     logo: DataTypes.STRING,
     game_mod: DataTypes.BOOLEAN,
     game_status: DataTypes.BOOLEAN,
-    change_2: DataTypes.INTEGER,
-    change_3: DataTypes.INTEGER,
+    next_win: DataTypes.INTEGER,
+    dice_1x: DataTypes.INTEGER,
+    dice_2x: DataTypes.INTEGER,
+    dice_3x: DataTypes.INTEGER,
     change_low: DataTypes.INTEGER,
-    change_mid: DataTypes.INTEGER,
     change_high: DataTypes.INTEGER
   }, {
     sequelize,

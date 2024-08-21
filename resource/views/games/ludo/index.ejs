@@ -53,7 +53,7 @@
                             </div>
                         </div>
 
-                        <div class="circle-wrapper">
+                        <div class="circle-wrapper d-none">
                             <div class="circle__item">
                                 <svg class="circle__spinner" viewBox="0 0 50 50">
                                     <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="3"></circle>
@@ -68,13 +68,13 @@
                         <div class="mr-top">
                             <div class="part1">
                                 <p class="left">
-                                   4-7
+                                   4-10
                                 </p>
                                 <p class="right">47%</p>
                             </div>
                             <div class="part2">
                                 <p class="left">
-                                   4-7
+                                   11-17
                                 </p>
                                 <p class="right">47%</p>
                             </div>
@@ -173,25 +173,114 @@
                         </div>
                     </div>
 
+                    <div class="menubarWrapper">
+                        <div class="bar settings">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <div class="bar mainmenu">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                    </div>
+
+                    <div class="hiddenModels settings">
+                        <div class="model-wrapper">
+                            <div class="close">
+                                <i class="fa-solid fa-circle-arrow-left"></i>
+                            </div>
+
+                            <div class="header-item">
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </div>
+
+                            <div class="items-wrapper"> 
+                                <div class="item" data-bs-toggle="modal" data-bs-target="#gameInfo">
+                                    <i class="fa-solid fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="top" title="Play Game"></i>
+                                </div>
+                                <div class="item">
+                                    <i class="fa-solid fa-volume-high" data-bs-toggle="tooltip" data-bs-placement="top" title="Music"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hiddenModels mainmenu">
+                        <div class="model-wrapper">
+                            <div class="close">
+                                <i class="fa-solid fa-circle-arrow-left"></i>
+                            </div>
+
+                            <div class="header-item">
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </div>
+
+                            <div class="items-wrapper"> 
+                                <div class="item d-none" data-bs-toggle="modal" data-bs-target="#todaysHistory">
+                                    <i class="fa-solid fa-clock-rotate-left"></i> 
+                                </div>
+                                <div class="item" data-bs-toggle="modal" data-bs-target="#activeUsers">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+                                <div class="item winnerUsers">
+                                    <i class="fa-solid fa-trophy"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
             <div class="bottom">
                 <div class="part1">
                     <img src="/assets/ludo/body-part1.jpg" alt="">
+                    <div class="bet-amount">
+                        <p><span>Bet: </span> <span class="bet">0</span></p>
+                        <p><span>Bet: </span> <span class="bet">0</span></p>
+                        <p><span>Bet: </span> <span class="bet">0</span></p>
+                    </div>
                 </div>
                 <div class="part2">
 
                     <div class="part2-top">
-                        <div class="inner-left">
-                            <img src="\assets\ludo\body-part2-1.jpg" alt="">
-                        </div>
-                        <div class="inner-middle">
-                            <img src="\assets\ludo\body-part2-2.jpg" alt="">
-                        </div>
-                        <div class="inner-right">
-                            <img src="\assets\ludo\body-part2-3.jpg" alt="">
-                        </div>
+                        <button class="inner" disabled>
+                            <img class="main" src="\assets\ludo\body-part2-1.jpg" alt="">
+                            <div class="contex">
+                                <div class="info">
+                                    <span>SMALL</span>
+                                    <span>4-10</span>
+                                </div>
+                                <div class="winx">2X</div>
+                            </div>
+                            <div class="coins">
+                            </div>
+                            <input type="hidden" value="1" class="board">
+                        </button>
+                        <button class="inner" disabled>
+                            <img class="main" src="\assets\ludo\body-part2-2.jpg" alt="">
+                            <div class="contex">
+                                <div class="info">
+                                    <span>ANY</span>
+                                    <span>TRIPLE</span>
+                                </div>
+                                <div class="winx">15X</div>
+                            </div>
+                            <div class="coins">
+                            </div>
+                            <input type="hidden" value="2" class="board">
+                        </button>
+                        <button class="inner" disabled>
+                            <img class="main" src="\assets\ludo\body-part2-3.jpg" alt="">
+                            <div class="contex">
+                                <div class="info">
+                                    <span>BIG</span>
+                                    <span>11-17</span>
+                                </div>
+                                <div class="winx">2X</div>
+                            </div>
+                            <div class="coins">
+                            </div>
+                            <input type="hidden" value="3" class="board">
+                        </button>
                     </div>
 
                     <div class="part2-middle-info">
@@ -202,61 +291,61 @@
 
                     <div class="part2-middle">
 
-                        <div class="board">
+                        <div class="board win2x-1">
                             <img src="/assets/ludo/new-chokka-1.png" alt="">
                             <img src="/assets/ludo/new-chokka-1.png" alt="">
                         </div>
-                        <div class="board">
+                        <div class="board win3x-1">
                             <img src="/assets/ludo/new-chokka-1.png" alt="">
                             <img src="/assets/ludo/new-chokka-1.png" alt="">
                             <img src="/assets/ludo/new-chokka-1.png" alt="">
                         </div>
-                        <div class="board">
+                        <div class="board win3x-2">
                             <img src="/assets/ludo/new-chokka-2.png" alt="">
                             <img src="/assets/ludo/new-chokka-2.png" alt="">
                             <img src="/assets/ludo/new-chokka-2.png" alt="">
                         </div>
-                        <div class="board">
+                        <div class="board win2x-2">
                             <img src="/assets/ludo/new-chokka-2.png" alt="">
                             <img src="/assets/ludo/new-chokka-2.png" alt="">
                         </div>
 
 
-                        <div class="board">
+                        <div class="board win2x-3">
                             <img src="/assets/ludo/new-chokka-3.png" alt="">
                             <img src="/assets/ludo/new-chokka-3.png" alt="">
                         </div>
-                        <div class="board">
+                        <div class="board  win3x-3">
                             <img src="/assets/ludo/new-chokka-3.png" alt="">
                             <img src="/assets/ludo/new-chokka-3.png" alt="">
                             <img src="/assets/ludo/new-chokka-3.png" alt="">
                         </div>
-                        <div class="board">
+                        <div class="board win3x-4">
                             <img src="/assets/ludo/new-chokka-4.png" alt="">
                             <img src="/assets/ludo/new-chokka-4.png" alt="">
                             <img src="/assets/ludo/new-chokka-4.png" alt="">
                         </div>
-                        <div class="board">
+                        <div class="board win2x-4">
                             <img src="/assets/ludo/new-chokka-4.png" alt="">
                             <img src="/assets/ludo/new-chokka-4.png" alt="">
                         </div>
 
 
-                        <div class="board">
+                        <div class="board win2x-5">
                             <img src="/assets/ludo/new-chokka-5.png" alt="">
                             <img src="/assets/ludo/new-chokka-5.png" alt="">
                         </div>
-                        <div class="board">
+                        <div class="board win3x-5">
                             <img src="/assets/ludo/new-chokka-5.png" alt="">
                             <img src="/assets/ludo/new-chokka-5.png" alt="">
                             <img src="/assets/ludo/new-chokka-5.png" alt="">
                         </div>
-                        <div class="board">
+                        <div class="board win3x-6">
                             <img src="/assets/ludo/new-chokka-6.png" alt="">
                             <img src="/assets/ludo/new-chokka-6.png" alt="">
                             <img src="/assets/ludo/new-chokka-6.png" alt="">
                         </div>
-                        <div class="board">
+                        <div class="board win2x-6">
                             <img src="/assets/ludo/new-chokka-6.png" alt="">
                             <img src="/assets/ludo/new-chokka-6.png" alt="">
                         </div>
@@ -271,13 +360,13 @@
 
         <div class="main-part2">
             <div class="part1">
-                <h2>Balance <span>413141</span></h2>
-                <h2>Your Bet <span>413141</span></h2>
+                <h2>Balance <span id="my-balance"><%= amount %></span></h2>
+                <h2>Your Bet <span id="my-bet">0</span></h2>
             </div>
             <div class="part2">
                 <div class="bottom-left">
-                    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRdW1a-u9LKjKONPavO0K8FnPODRmoGcDLdp6hXkXGd2bgkXKaS" alt="">
-                    <h2>Your Name</h2>
+                    <img src="<%= img %>" alt="">
+                    <h2><%= name %></h2>
                 </div>
                 <div class="bottom-middle">
                     <div class="any-btn">
@@ -289,21 +378,21 @@
                         <img class="border-img" src="\assets\ludo\coins-border.png" alt="">
 
                         <div class="main-coin">
-                            <img src="\assets\ludo\coin1.png" alt="">
+                            <img coin="1" amount="100" src="\assets\ludo\coin1.png" alt="">
                         </div>
 
                         <div class="coins">
                             <div style="--i:0" class="coin">
-                                <img src="\assets\ludo\coin1.png" alt="">
+                                <img coin="1" amount="100" src="\assets\ludo\coin1.png" alt="">
                             </div>
                             <div style="--i:1" class="coin">
-                                <img src="\assets\ludo\coin1.png" alt="">
+                                <img coin="2" amount="500" src="\assets\ludo\coin2.png" alt="">
                             </div>
                             <div style="--i:2" class="coin">
-                                <img src="\assets\ludo\coin1.png" alt="">
+                                <img coin="3" amount="10000" src="\assets\ludo\coin3.png" alt="">
                             </div>
                             <div style="--i:3" class="coin">
-                                <img src="\assets\ludo\coin1.png" alt="">
+                                <img coin="4" amount="100000" src="\assets\ludo\coin4.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -321,34 +410,258 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- custom-model  -->
+
+        
+        <div class="custom-model-wrapper start-bet-model">
+            <div class="custom-model">
+                <p>START BET</p>
+            </div>
+        </div>
+        <div class="custom-model-wrapper bet-lock-model">
+            <div class="custom-model">
+                <p>BET LOCK</p>
+            </div>
+        </div>
+
+        <div class="custom-model-wrapper bet-result-model">
+            <div class="custom-model">
+                <p class="result">Result</p>
+                <div class="img-wrapper">
+                    <img src="/assets/ludo/new-chokka-1.png" alt="">
+                    <img src="/assets/ludo/new-chokka-1.png" alt="">
+                    <img src="/assets/ludo/new-chokka-1.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="custom-model-wrapper bet-result-model">
+            <div class="custom-model">
+                <p class="result">Result</p>
+                <div class="img-wrapper">
+                    <img src="/assets/ludo/new-chokka-1.png" alt="">
+                    <img src="/assets/ludo/new-chokka-1.png" alt="">
+                    <img src="/assets/ludo/new-chokka-1.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div style="background: transparent;" class="custom-model-wrapper" id="bet-winner-users">
+            <div class="custom-model">
+                <div class="winner-header">
+                    <span></span>
+                    <h5 class="modal-title">Winner</h5>
+                    <p type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></p>
+                </div>
+                <div class="winner-users-wrapeer">
+                    <div class="winner-users" id="winner-users">
+                        <div class="user">
+                            <div class="img">
+                                <img src="/assets/ludo/hat-l.png" alt="" class="winner-hat">
+                                <img class="profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp0xKoXUryp0JZ1Sxp-99eQiQcFrmA1M1qbQ&s" alt="">
+                                <p class="name">Hi Hello</p>
+                            </div>
+                            <div class="amount">
+                                <p class="bet"><span class="text">WIN: </span> <span class="a">100</span></p>
+                            </div>
+                        </div>
+                        <div class="user">
+                            <div class="img">
+                                <img src="\assets\ludo\winner-2.png" alt="" class="winner-hat">
+                                <img class="profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp0xKoXUryp0JZ1Sxp-99eQiQcFrmA1M1qbQ&s" alt="">
+                                <p class="name">Hi Hello</p>
+                            </div>
+                            <div class="amount">
+                                <p class="bet"><span class="text">WIN: </span> <span class="a">100</span></p>
+                            </div>
+                        </div>
+                        <div class="user">
+                            <div class="img">
+                                <img src="\assets\ludo\winner-3.png" alt="" class="winner-hat">
+                                <img class="profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp0xKoXUryp0JZ1Sxp-99eQiQcFrmA1M1qbQ&s" alt="">
+                                <p class="name">Hi Hello</p>
+                            </div>
+                            <div class="amount">
+                                <p class="bet"><span class="text">WIN: </span> <span class="a">100</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="my-win-list">
+                        <div class="left">
+                            <img class="profile" src="<%= img %>" alt="">
+                            <p class="name"><%= name %></p>
+                        </div>
+                        <div class="right">
+                            <p class="bet"><span class="text">BET: </span> <span class="a" id="pop-up-mybet">00</span></p>
+                            <p class="bet"><span class="text">WIN: </span> <span class="a" id="pop-up-mywin">00</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
    
 
     <!-- hidden  -->
-    <input type="hidden" id="user-id" value="{{$user->id}}">
-    <input type="hidden" id="user-name" value="{{$user->name}}">
-    <input type="hidden" id="user-img" value="{{$user->profile_picture}}">
+    <input type="hidden" id="user-id" value="<%= user_id %>">
+    <input type="hidden" id="user-name" value="<%= name %>">
+    <input type="hidden" id="user-img" value="<%= img %>">
     <input type="hidden" id="board-id" value="00000000">
-
     <button class="d-none" data-bs-toggle="modal" data-bs-target="#winner-users" id="winner-users-btn"></button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="gameInfo" tabindex="-1" aria-labelledby="gameInfoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gameInfoLabel">Game Information</h5>
+                    <p type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></p>
+                </div>
+                <div class="modal-body">
+                    <ul class="info">
+                        <li>This is a simple game that uses only three 6 sided dice and determines its result based on the sum of these three dice.</li>
+                        <li>There is a variety of items you can bet on. As long as the sum of your dice matches the item number, you win prizes.</li>
+                        <li>Small or big, pick one to bet on.</li>
+                        <li>When you bet on small or big, in the event of Baozi (the three dice are the same), the banker wins.</li>
+                        <li>If the outcome of any round cannot be determined due to malfunction, the round will be deemed as invalid.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="todaysHistory" tabindex="-1" aria-labelledby="todaysHistoryLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="todaysHistoryLabel">Today's History</h5>
+                    <p type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></p>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped todaysHistory">
+                        <thead>
+                            <tr>
+                                <th scope="col">Bet</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Win</th>
+                                <th scope="col">Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Small</td>
+                                <td>1000</td>
+                                <td>200</td>
+                                <td>10:12 AM</td>
+                            </tr>
+                            <tr>
+                                <td>Small</td>
+                                <td>1000</td>
+                                <td>200</td>
+                                <td>10:12 AM</td>
+                            </tr>
+                            <tr>
+                                <td>Small</td>
+                                <td>1000</td>
+                                <td>200</td>
+                                <td>10:12 AM</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade " id="activeUsers" tabindex="-1" aria-labelledby="activeUsersLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="activeUsersLabel">Active Users</h5>
+                    <p type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></p>
+                </div>
+                <div class="modal-body">
+                    <div class="users-wrapper">
+                        <div class="user">
+                            <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRdW1a-u9LKjKONPavO0K8FnPODRmoGcDLdp6hXkXGd2bgkXKaS" alt="">
+                            <p>My Name</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="winnerUsers" tabindex="-1" aria-labelledby="winnerUsersLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between">
+                    <h5 class="modal-title" id="winnerUsersLabel"></h5>
+                    <h5 class="modal-title" id="winnerUsersLabel">Winner</h5>
+                    <p type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></p>
+                </div>
+                <div class="modal-body">
+                    <div class="winner-users-wrapeer">
+                        <img src="/assets/ludo/hat-l.png" alt="" class="perty-hat-left">
+                        <div class="winner-users">
+                            <div class="user">
+                                <div class="img">
+                                    <img src="" alt="" class="winner-hat">
+                                    <img class="profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp0xKoXUryp0JZ1Sxp-99eQiQcFrmA1M1qbQ&s" alt="">
+                                    <p class="name">Hi Hello</p>
+                                </div>
+                                <div class="amount">
+                                    <p class="bet"><span class="text">BET: </span> <span class="a">100</span></p>
+                                    <p class="bet"><span class="text">WIN: </span> <span class="a">100</span></p>
+                                </div>
+                            </div>
+                            <div class="user">
+                                <div class="img">
+                                    <img src="\assets\ludo\winner-2.png" alt="" class="winner-hat">
+                                    <img class="profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp0xKoXUryp0JZ1Sxp-99eQiQcFrmA1M1qbQ&s" alt="">
+                                    <p class="name">Hi Hello</p>
+                                </div>
+                                <div class="amount">
+                                    <p class="bet"><span class="text">BET: </span> <span class="a">100</span></p>
+                                    <p class="bet"><span class="text">WIN: </span> <span class="a">100</span></p>
+                                </div>
+                            </div>
+                            <div class="user">
+                                <div class="img">
+                                    <img src="\assets\ludo\winner-3.png" alt="" class="winner-hat">
+                                    <img class="profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp0xKoXUryp0JZ1Sxp-99eQiQcFrmA1M1qbQ&s" alt="">
+                                    <p class="name">Hi Hello</p>
+                                </div>
+                                <div class="amount">
+                                    <p class="bet"><span class="text">BET: </span> <span class="a">100</span></p>
+                                    <p class="bet"><span class="text">WIN: </span> <span class="a">100</span></p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="my-win-list">
+                            <div class="left">
+                                <img class="profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp0xKoXUryp0JZ1Sxp-99eQiQcFrmA1M1qbQ&s" alt="">
+                                <p class="name">1000</p>
+                            </div>
+                            <div class="right">
+                                <p class="bet"><span class="text">BET: </span> <span class="a" id="pop-up-mybet">00</span></p>
+                                <p class="bet"><span class="text">WIN: </span> <span class="a" id="pop-up-mywin">00</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- script  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0/js/bootstrap.min.js" integrity="sha512-Pv/SmxhkTB6tWGQWDa6gHgJpfBdIpyUy59QkbshS1948GRmj6WgZz18PaDMOqaEyKLRAvgil7sx/WACNGE4Txw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js" integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI" crossorigin="anonymous"></script>
-    <script>
-        const urls = {
-            "url" : '{{ url('/') }}',
-            "socket" : "{{config('lucky77.socket_url')}}/lucky7",
-            "betInsert" : "{{route('lucky77.betInsert')}}",
-            "getAmount" : "{{route('lucky77.getAmount')}}",
-            "startGame" : "{{route('lucky77.startGame')}}",
-            "getResults" : "{{route('lucky77.getResults')}}",
-        };
-    </script>
+    
     <script src="/script/ludo.js"></script>
-
 </body>
 </html>

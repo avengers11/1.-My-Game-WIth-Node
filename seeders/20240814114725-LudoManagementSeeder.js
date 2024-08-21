@@ -18,10 +18,10 @@ module.exports = {
       logo: 'logo.png',
       game_mod: true,
       game_status: true,
-      change_2: 10,
-      change_3: 20,
+      dice_1x: 800,
+      dice_2x: 950,
+      dice_3x: 100,
       change_low: 800,
-      change_mid: 900,
       change_high: 1000
     }], {});
   },

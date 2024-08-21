@@ -6,4 +6,7 @@ const ludoController = require('../controllers/LudoController');
 // view    
 router.get('/:user', ludoController.index);
 
+// backend 
+router.get('/get-info/:user', ludoController.userInfo);
+
 module.exports = router;

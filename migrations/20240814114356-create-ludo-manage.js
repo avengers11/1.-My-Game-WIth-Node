@@ -21,19 +21,22 @@ module.exports = {
       game_status: {
         type: Sequelize.BOOLEAN
       },
-      change_2: {
+      next_win: {
         type: Sequelize.INTEGER
       },
-      change_3: {
+      dice_1x: {
         type: Sequelize.INTEGER
       },
-      change_low: {
+      dice_2x: {
         type: Sequelize.INTEGER
       },
-      change_mid: {
+      dice_3x: {
         type: Sequelize.INTEGER
       },
       change_high: {
+        type: Sequelize.INTEGER
+      },
+      change_low: {
         type: Sequelize.INTEGER
       },
       createdAt: {

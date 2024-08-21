@@ -1,0 +1,79 @@
+<%- include('../includes/header') %>
+
+
+ <!-- Form Start -->
+ <div class="container-fluid pt-4 px-4">
+
+    <form action="/admin/game-ludo" method="post">
+        <div class="row g-4">
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">General Settings</h6>
+                    
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="game_status" name="game_status" <% if (game_status) { %> checked <% } %>>
+                        <label class="form-check-label" for="game_status">Game start</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="game_mod" name="game_mod" <% if (game_mod) { %> checked <% } %>>
+                        <label class="form-check-label" for="game_mod"> Game mode auto</label>
+                    </div>
+                   
+                    <hr>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Next win</label>
+                        <select class="form-select mb-3" name="next_win">
+                            <option value="1" <% if (next_win === 1) { %> selected <% } %>>Small Board</option>
+                            <option value="2" <% if (next_win === 2) { %> selected <% } %>>Triple Board</option>
+                            <option value="3" <% if (next_win === 3) { %> selected <% } %>>Big Board</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Win Rate</h6>
+                        <div class="small-big">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Small board change (1 - <%= change_low %>)</label>
+                                <input type="text" class="form-control" name="change_low" value="<%= change_low %>">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Big board change (<%= change_low+1 %> - 1000)</label>
+                                <input type="text" class="form-control" name="change_high" value="<%= change_high %>" disabled>
+                            </div>
+                        </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">1x dice change (1 - <%= dice_1x %>)</label>
+                        <input type="text" class="form-control" name="dice_1x" value="<%= dice_1x %>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">2x dice change (<%= dice_1x+1 %> - <%= dice_2x %>)</label>
+                        <input type="text" class="form-control" name="dice_2x" value="<%= dice_2x %>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">3x dice change (<%= dice_2x+1 %> - 1000)</label>
+                        <input type="text" class="form-control" name="dice_3x" value="1000" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-secondary rounded-top p-4 mt-2 mb-5">
+            <button type="submit" class="btn btn-primary">Confirmed</button>
+        </div>
+    </form>
+
+
+        
+
+</div>
+<!-- Form End -->
+
+
+<%- include('../includes/footer') %>

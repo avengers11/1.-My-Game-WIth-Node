@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Jersey+10&family=Matemasie&family=Oswald:wght@200..700&display=swap');
+
 body{
     display: flex;
     align-items: center;
@@ -13,6 +15,7 @@ body{
         justify-content: space-between;
         flex-direction: column;
         overflow: hidden;
+        position: relative;
 
         // main-part
         .main-part1{
@@ -111,25 +114,25 @@ body{
                         }
                         .part1{
                           display: flex;
-                          gap: 12px;
+                          gap: 10px;
                           border-right: 2px groove #63281b;
                           align-items: center;
                           justify-content: center;
                           .left{
                             color: #9F6824;
-                            font-size: 14px;
+                            font-size: 12px;
                             font-weight: bold;
                           }
                         }
                         .part2{
                           display: flex;
-                          gap: 12px;
+                          gap: 10px;
                           border-right: 2px groove #63281b;
                           align-items: center;
                           justify-content: center;
                           .left{
                             color: #9F6824;
-                            font-size: 14px;
+                            font-size: 12px;
                             font-weight: bold;
                           }
                         }
@@ -203,7 +206,7 @@ body{
                           height: 40px;
                           width: 40px;
                           border-radius: 50%;
-                          border: 1px groove gold;
+                          border: 1px groove #d39f0d;
                           padding: 1px;
                           background: black;
                         }
@@ -215,16 +218,123 @@ body{
                         }
                       }
                     }
+                    .menubarWrapper{
+                      position: absolute;
+                      display: flex;
+                      align-items: center;
+                      justify-content: space-between;
+                      flex-direction: column;
+                      gap: 5px;
+                      left: -1px;
+                      bottom: 64px;
+                      .bar{
+                        background-image: url(../../assets/ludo/menubar-bg.png);
+                        background-size: 100% 100%;
+                        padding: 7px;
+                        padding-left: 4px;
+                        cursor: pointer;
+                        i{
+                          color: #e9d35d;
+                        }
+                      }
+                    }
+                    // hidden model 
+                    .hiddenModels{
+                      position: absolute;
+                      left: -170px;
+                      top: 0;
+                      height: 100vh;
+                      width: 130px;
+                      background: #000000b8;
+                      z-index: 13;
+                      transition: 0.4s ease-in-out;
+                      .model-wrapper{
+                        position: relative;
+                        height: 100vh;
+                        .close{
+                          position: absolute;
+                          right: -54px;
+                          top: 50%;
+                          transform: translate(-50%, -50%);
+                          background: #000000b8;
+                          border-radius: 0 40px 40px 0;
+                          padding: 10px;
+                          cursor: pointer;
+                          i{
+                            color: white;
+                          }
+                        }
+                        .header-item{
+                          margin-top: 50px;
+                          margin-bottom: 10px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          i{
+                            font-size: 20px;
+                            color: #8b8b8b;
+                          }
+                        }
+                        .items-wrapper{
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          gap: 5px;
+                          flex-direction: column;
+                          .item{
+                            border-radius: 50%;
+                            background: #555555;
+                            padding: 10px;
+                            height: 40px;
+                            width: 40px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            i{
+                              color: white;
+                            }
+                          }
+                        }
+                      }
+                      &.active{
+                        left: 0;
+                      }
+                    }
                 }
             }
             .bottom{
                 width: 100%;
                 .part1{
+                  position: relative;
                     img{
                         width: 100%;
                         height: 30px;
                         z-index: 10;
                         position: relative;
+                    }
+                    .bet-amount{
+                      position: absolute;
+                      width: 100%;
+                      display: grid;
+                      grid-template-columns: repeat(3, 1fr);
+                      z-index: 11;
+                      top: 5px;
+                      p{
+                        margin-bottom: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 5px;
+                        span{
+                          font-size: 12px;
+                          color: #b08d79;
+                          font-weight: bold;
+                          &:nth-child(2){
+                            color: #c5c5c5;
+                          }
+                        }
+                      }
                     }
                 }
                 .part2{
@@ -232,19 +342,103 @@ body{
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        .inner-left{
-                            img{
+                        .inner{
+                            position: relative;
+                            border: none;
+                            outline: none;
+                            background: none;
+                            padding: 0;
+                            &.active{
+                              filter: grayscale(50%) brightness(50%);
+                            }
+
+                            img.main{
                                 width: 100%;
                             }
-                        }
-                        .inner-middle{
-                            img{
-                                width: 100%;
+                            .contex{
+                              position: absolute;
+                              left: 50%;
+                              top: 50%;
+                              transform: translate(-50%, -50%);
+                              .info{
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                flex-direction: column;
+                                span{
+                                  font-size: 16px;
+                                  font-weight: bold;
+                                  line-height: 16px;
+                                }
+                              }
+                              .winx{
+                                font-size: 14px;
+                                text-align: center;
+                                color: #00633e;
+                                font-weight: bold;
+                                margin-top: 10px;
+                                line-height: 13px;
+                              }
                             }
-                        }
-                        .inner-right{
-                            img{
-                                width: 100%;
+                            .coins{
+                              img{
+                                position: absolute;
+                                height: 20px;
+                                z-index: 12;
+                              }
+                            }
+                            &:nth-child(1){
+                              .contex{
+                                .info{
+                                  span{
+                                    color: #b5001a;
+                                  }
+                                }
+                              }
+                              .coins{
+                                img{
+                                  top: -22rem;
+                                  left: -2rem;
+                                }
+                              }
+                            }
+                            &:nth-child(1){
+                              .contex{
+                                .info{
+                                  span{
+                                    color: #b5001a;
+                                  }
+                                }
+                              }
+                              .coins{
+                                img{
+                                  top: -22rem;
+                                  left: -2rem;
+                                }
+                              }
+                            }
+                            &:nth-child(2){
+                              .coins{
+                                img{
+                                  top: -22rem;
+                                  left: -11rem;
+                                }
+                              }
+                            }
+                            &:nth-child(3){
+                              .contex{
+                                .info{
+                                  span{
+                                    color: #d7d7d7;
+                                  }
+                                }
+                              }
+                              .coins{
+                                img{
+                                  top: -22rem;
+                                  left: -30rem;
+                                }
+                              }
                             }
                         }
                     }
@@ -256,7 +450,7 @@ body{
                       p{
                         margin-bottom: 0;
                         font-size: 10px;
-                        color: gold;
+                        color: #d39f0d;
                         text-align: center;
                       }
                     }
@@ -272,6 +466,9 @@ body{
                         padding: 10px;
                         border: 2px solid #CDF2D9;
                         gap: 3px;
+                        &.active{
+                          filter: grayscale(50%) brightness(50%);
+                        }
                         img{
                           height: 30px;
                           width: 30px;
@@ -339,7 +536,7 @@ body{
                     color: white;
                     margin-bottom: 0;
                     span{
-                        color: gold;
+                        color: #d39f0d;
                         font-weight: bold;
                     }
                 }
@@ -363,7 +560,7 @@ body{
                         border-radius: 50%;
                         background-size: cover;
                         background-position: top;
-                        border: 1px groove gold;
+                        border: 1px groove #d39f0d;
                         padding: 1px;
                         background: black;
                     }
@@ -425,6 +622,26 @@ body{
                                     position: relative;
                                     box-shadow: 5px 5px 15px #0b482f;
                                 }
+                                &:nth-child(1){
+                                  img{
+                                    transform: rotate(-9deg);
+                                  }
+                                }
+                                &:nth-child(2){
+                                  img{
+                                    transform: rotate(-80deg);
+                                  }
+                                }
+                                &:nth-child(3){
+                                  img{
+                                    transform: rotate(-145deg);
+                                  }
+                                }
+                                &:nth-child(4){
+                                  img{
+                                    transform: rotate(154deg);
+                                  }
+                                }
                             }
                             &.active{
                                 .coin{
@@ -484,26 +701,514 @@ body{
             }
         }
 
-        // .body-mr{
-        //     // height: 250px;
-        //     background-image: url(../../../assets/games/ludo/body-bg.jpg);
-        //     background-size: 100% 100%;
-        //     overflow: hidden;
-        //     .part1{
-        //         img{
+        
+        // custom model 
+        .custom-model-wrapper{
+          position: absolute;
+          left: 50%;
+          top: -50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          z-index: 12;
+          background-image: url(../../assets/ludo/alert-bg.png);
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          transition: 0.5s ease-in-out;
+          &#bet-winner-users{
+            background: rgba(31, 31, 31, 0.8588235294) !important;
+            width: 90%;
+            border-radius: 7px;
+            border: 1px solid #d39f0d;
+            .custom-model{
+              .winner-header{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 24px;
+                .modal-title{
+                  color: white;
+                  color: white;
+                  font-family: "Matemasie", sans-serif;
+                }
+              }
+            }
+          }
+
+          &.active{
+            top: 50%;
+          }
+          .custom-model{
+            padding: 15px;
+            p{
+              text-align: center;
+              color: #b5001a;
+              margin-bottom: 0;
+              font-size: 30px;
+              font-family: "Jersey 10", sans-serif;
+              font-weight: 400;
+              font-style: normal;
+              line-height: 20px;
+            }
+            .result{
+              color: white;
+              margin-bottom: 5px;
+            }
+            .img-wrapper{
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 5px;
+              img{
+                height: 35px;
+                width: 35px;
+              }
+            }
+
+            .winner-users-wrapeer{
+              position: relative;
+              p{
+                font-family: sans-serif !important;
+              }
+              .perty-hat-left{
+                height: 5.5rem;
+                position: absolute;
+                left: 9px;
+                top: -56px;
+                transform: rotate(333deg);
+              }
+              .no-winner{
+                  margin-bottom: 0;
+                  color: #d39f0d !important;
+                  font-weight: bold;
+                  font-family: "Ga Maamli", sans-serif;
+                  font-family: 14px;
+                  text-align: center;
+              }
+              .winner-users{
+                  display: grid;
+                  grid-template-columns: repeat(3, 1fr);
+                  gap: 15px;
+                  .user{
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      flex-direction: column;
+                      width: 100%;
+                      gap: 15px;
+
+                      &:nth-child(1){
+                        .img{
+                          .winner-hat{
+                            height: 5.5rem;
+                position: absolute;
+                left: 9px;
+                top: -56px;
+                transform: rotate(333deg);
+                          }
+                        }
+                      }
+
+                      &:nth-child(2){
+                        .img{
+                          .winner-hat{
+                            top: -16px;
+                            left: 24px;
+                            transform: rotate(322deg);
+                          }
+                        }
+                      }
+                      &:nth-child(3){
+                        .img{
+                          .winner-hat{
+                            top: -17px;
+                            left: 19px;
+                            transform: rotate(322deg);
+                          }
+                        }
+                      }
                     
-        //         }
-        //     }
-        //     .part2{
-        //         .top{
-        //             img{
-                        
-        //             }
-        //         }
-                
-        //     }
-        // }
+                      .img{
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          position: relative;
+                          width: 100%;
+  
+                          .winner-hat{
+                              height: 30px;
+                              position: absolute;
+                              top: -15px;
+                              left: 27px;
+                              transform: rotate(314deg);
+                          }
+                          .profile{
+                              height: 50px;
+                              width: 50px;
+                              border-radius: 50%;
+                              border: 2px solid #d39f0d;
+                              object-fit: cover;
+                              z-index: 10;
+                          }
+                          .name{
+                              margin-bottom: 0;
+                              top: 36px;
+                              color: white;
+                              font-size: 12px;
+                              background: #039B68;
+                              padding: 6px;
+                              position: absolute;
+                              width: 100%;
+                              text-align: center;
+                              border-radius: 7px;
+                              margin-top: 10px;
+                          }
+                      }
+                      .amount{
+                          margin-top: 20px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          gap: 5px;
+                          flex-direction: column;
+                          p{
+                              font-size: 10px;
+                              color: white;
+                              margin-bottom: 0;
+                          }
+                          .bet{
+                              .text{
+                                  color: #d39f0d;
+                                  font-weight: bold;
+                                  font-size: 12px;
+                              }
+                              .a{
+                                  background: #039B68;
+                                  padding: 2px 15px;
+                                  border-radius: 7px;
+                              }
+                          }
+                      }
+                  }
+              }
+              .my-win-list{
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  background: #00452e;
+                  padding: 5px;
+                  margin-top: 20px;
+  
+                  border-radius: 7px;
+                  .left{
+                      display: flex;
+                      display: flex;
+                      align-items: center;
+                      justify-content: start;
+                      gap: 5px;
+                      img{
+                          height: 50px;
+                          width: 50px;
+                          border-radius: 7px;
+                          border: 2px groove #d39f0d;
+                      }
+                      p{
+                          margin-bottom: 0;
+                          color: white;
+                          font-size: 12px;
+                      }
+                  }
+                  .right{
+                      margin-top: 20px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 5px;
+                      flex-direction: column;
+                      p{
+                          font-size: 10px;
+                          color: white;
+                          margin-bottom: 0;
+                      }
+                      .bet{
+                          .text{
+                              color: #d39f0d;
+                              font-weight: bold;
+                              font-size: 12px;
+                          }
+                          .a{
+                              background: #039B68;
+                              padding: 2px 15px;
+                              border-radius: 7px;
+                          }
+                      }
+                  }
+              }
+            }
+          }
+        }
+
     }
+}
+
+// model 
+.modal{
+  .modal-dialog{
+    .modal-content{
+      background: #1f1f1fdb !important;
+      margin-top: 20px;
+      border: 1px solid #d39f0d;
+      .modal-header{
+        border-bottom: 1px solid #d39f0d;
+        .modal-title{
+          color: white;
+          font-family: "Matemasie", sans-serif;
+        }
+        p.close{
+          margin-bottom: 0;
+          i{
+            font-size: 25px;
+            color: red;
+          }
+        }
+      }
+      .modal-body{
+        // informaion 
+        .info{
+          display: flex;
+          align-items: start;
+          justify-content: start;
+          gap: 8px;
+          flex-direction: column;
+          margin-bottom: 0;
+          li{
+            color: white;
+            font-size: 14px;
+          }
+        }
+
+        // winner-users-wrapeer
+        .winner-users-wrapeer{
+            position: relative;
+            .perty-hat-left{
+              height: 5.5rem;
+              position: absolute;
+              left: 12px;
+              top: -57px;
+              transform: rotate(333deg);
+            }
+            .no-winner{
+                margin-bottom: 0;
+                color: #d39f0d !important;
+                font-weight: bold;
+                font-family: "Ga Maamli", sans-serif;
+                font-family: 14px;
+                text-align: center;
+            }
+            .winner-users{
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+                .user{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    width: 100%;
+
+                    .img{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+                        width: 100%;
+
+                        .winner-hat{
+                            height: 30px;
+                            position: absolute;
+                            top: -15px;
+                            left: 27px;
+                            transform: rotate(314deg);
+                        }
+                        .profile{
+                            height: 50px;
+                            width: 50px;
+                            border-radius: 50%;
+                            border: 2px solid #d39f0d;
+                            object-fit: cover;
+                        }
+                        .name{
+                            margin-bottom: 0;
+                            top: 36px;
+                            color: white;
+                            font-size: 12px;
+                            background: #039B68;
+                            padding: 6px;
+                            position: absolute;
+                            width: 100%;
+                            text-align: center;
+                            border-radius: 7px;
+                        }
+                    }
+                    .amount{
+                        margin-top: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 5px;
+                        flex-direction: column;
+                        p{
+                            font-size: 10px;
+                            color: white;
+                            margin-bottom: 0;
+                        }
+                        .bet{
+                            .text{
+                                color: #d39f0d;
+                                font-weight: bold;
+                                font-size: 12px;
+                            }
+                            .a{
+                                background: #039B68;
+                                padding: 2px 15px;
+                                border-radius: 7px;
+                            }
+                        }
+                    }
+                }
+            }
+            .my-win-list{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: #00452e;
+                padding: 5px;
+                margin-top: 20px;
+
+                border-radius: 7px;
+                .left{
+                    display: flex;
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                    gap: 5px;
+                    img{
+                        height: 50px;
+                        width: 50px;
+                        border-radius: 7px;
+                        border: 2px groove #d39f0d;
+                    }
+                    p{
+                        margin-bottom: 0;
+                        color: white;
+                        font-size: 12px;
+                    }
+                }
+                .right{
+                    margin-top: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 5px;
+                    flex-direction: column;
+                    p{
+                        font-size: 10px;
+                        color: white;
+                        margin-bottom: 0;
+                    }
+                    .bet{
+                        .text{
+                            color: #d39f0d;
+                            font-weight: bold;
+                            font-size: 12px;
+                        }
+                        .a{
+                            background: #039B68;
+                            padding: 2px 15px;
+                            border-radius: 7px;
+                        }
+                    }
+                }
+            }
+        }
+
+        // .users-wrapper
+        .users-wrapper{
+          display: flex;
+          align-items: start;
+          justify-content: space-around;
+          gap: 8px;
+          flex-wrap: wrap;
+          .user{
+            backdrop-filter: blur(1px);
+            background-color: #ffffff3b;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            flex-direction: column;
+            width: 45px;
+            padding: 5px;
+            border-radius: 7px;
+            height: 61px;
+            overflow: hidden;
+            gap: 2px;
+            img{
+              height: 35px;
+              width: 35px;
+              border-radius: 7px;
+              background-position: top;
+            }
+            p{
+              margin-bottom: 0;
+              font-size: 10px;
+              color: white;
+              text-align: center;
+            }
+          }
+        }
+
+        // todaysHistory
+        .todaysHistory{
+          thead{
+            tr{
+              th{
+                color: white;
+                font-size: 14px;
+                font-weight: bold;
+                text-align: center;
+                border-bottom: 1px solid #d39f0d;
+                &:first-child{
+                  text-align: start;
+                }
+                &:last-child{
+                  text-align: end;
+                }
+              }
+            }
+          }
+          tbody{
+            tr{
+              &:nth-child(even){
+                background: #6f6f6f;
+              }
+              td{
+                color: white;
+                font-size: 12px;
+                text-align: center;
+                border-bottom: 0;
+                &:first-child{
+                  text-align: start;
+                }
+                &:last-child{
+                  text-align: end;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 // ==============
