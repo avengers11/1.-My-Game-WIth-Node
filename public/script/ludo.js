@@ -1,6 +1,7 @@
 $(document).ready(function() {
     // socket
-    const socket = io('http://localhost:3000/jili-ludo');
+    const origin = $("#origin").val();
+    const socket = io(`${origin}/jili-ludo`);
 
     // global 
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -370,58 +371,8 @@ $(document).ready(function() {
 
 // test 
 
-/*
-
 $(window).click(function(){
-    const random = Math.floor(Math.random() * 1000) + 1;
-    const isLow = random > 100 && random <= 800;
-    const thisBoardAmount = [
-        {
-            "board": 1,
-            "amount": 100
-        },
-        {
-            "board": 3,
-            "amount": 50
-        }
-    ];
-    let boardNumber = determineBoardNumber(thisBoardAmount, isLow);
-    
-    // If random is within the range for board 2, set board number to 2
-    if (random > 10 && random <= 100) {
-        boardNumber = 2;
-    }
-
-    console.log({"random": random, "boardNumber": boardNumber});
     
 
-    function determineBoardNumber(thisBoardAmount, isLow) {
-        if (thisBoardAmount.length === 0) {
-            return Math.random() < 0.5 ? 1 : 3;
-        }
-    
-        // Get the amounts for board 1 and board 3
-        const board1Amount = thisBoardAmount.find(item => item.board === 1)?.amount;
-        const board3Amount = thisBoardAmount.find(item => item.board === 3)?.amount;
-        if (board1Amount === board3Amount) {
-            return Math.random() < 0.5 ? 1 : 3;
-        }
-    
-        // Initialize the selected board with the first board in the array
-        let selectedBoard = thisBoardAmount[0];
-    
-        // Iterate through each board to find the board with the desired amount
-        thisBoardAmount.forEach(currentBoard => {
-            const shouldReplace = isLow ? currentBoard.amount < selectedBoard.amount : currentBoard.amount > selectedBoard.amount;
-            if (shouldReplace) {
-                selectedBoard = currentBoard;
-            }
-        });
-    
-        // Return the board number of the selected board
-        return selectedBoard.board;
-    }
+    console.log(origin);
 });
-
-
-*/

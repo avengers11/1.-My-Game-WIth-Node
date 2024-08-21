@@ -7,6 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const session = require('express-session');
 const flash = require('connect-flash');
+require('dotenv').config();
 
 // Session configuration
 app.use(session({
@@ -30,7 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 // Set up Socket.io with CORS options
 const io = socketIo(server, {
     cors: {
-        origin: "http://localhost", // Your frontend URL
+        origin: process.env.FRONTEND_URL, // Your frontend URL
         methods: ["GET", "POST"],
         allowedHeaders: ["my-custom-header"],
         credentials: true

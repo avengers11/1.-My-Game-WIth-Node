@@ -1,6 +1,7 @@
 // controllers/userController.js
 const { User, Ludo_Manage} = require('../models');
 const { ludoManage } = require('../service/global');
+require('dotenv').config();
 
 /*
 ===================
@@ -20,8 +21,9 @@ exports.index = async (req, res) => {
     const name = user.name;
     const img = `/assets/general/users/${user.image}`;
     const amount = user.amount;
-    
-    res.render('games/ludo/index', { user_id, name, img, amount, ludoManage});
+    const origin = process.env.FRONTEND_URL;
+
+    res.render('games/ludo/index', { user_id, name, img, amount, ludoManage, origin});
   } catch (error) {
     res.status(500).json({ error: 'An error occurred while fetching user.' });
   }
