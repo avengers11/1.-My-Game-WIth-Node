@@ -73,14 +73,30 @@ JiliLusoService(io);
 
 /*
 ===========================
-    Ludo Game Start
+    ADMIN PANEL Start
+===========================
+*/
+const GreadyService = require('./service/GreadyService');
+const GreadyRoutes = require('./routes/gready');
+app.use('/gready', GreadyRoutes);
+GreadyService(io);
+/*
+===========================
+    ADMIN PANEL END
+===========================
+*/
+
+
+/*
+===========================
+    ADMIN PANEL Start
 ===========================
 */
 const admin = require('./routes/admin');
 app.use('/admin', admin);
 /*
 ===========================
-    Ludo Game END
+    ADMIN PANEL END
 ===========================
 */
 

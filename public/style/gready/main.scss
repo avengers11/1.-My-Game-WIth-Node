@@ -1,0 +1,15 @@
+body{
+    #container{
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        height: 100vh;
+        #canvas {
+            max-width: 600px;  /* Maximum width */
+            max-height: 600px; /* Maximum height */
+            width: 100%;       /* Full width */
+            background-color: black;
+          }
+    }
+}
