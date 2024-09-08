@@ -1,0 +1,101 @@
+<%- include('../includes/header') %>
+
+
+ <!-- Form Start -->
+ <div class="container-fluid pt-4 px-4">
+
+    <form action="/admin/game-gready" method="post">
+        <div class="row g-4">
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">General Settings</h6>
+                    
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="game_status" name="game_status" <% if (game_status) { %> checked <% } %>>
+                        <label class="form-check-label" for="game_status">Game start</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="game_mod" name="game_mod" <% if (game_mod) { %> checked <% } %>>
+                        <label class="form-check-label" for="game_mod"> Game mode auto</label>
+                    </div>
+                   
+                    <hr>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Next win</label>
+                        <select class="form-select mb-3" name="next_win">
+                            <option value="1" <% if (next_win === 1) { %> selected <% } %>> Strawberry </option>
+                            <option value="2" <% if (next_win === 2) { %> selected <% } %>> Burger </option>
+                            <option value="3" <% if (next_win === 3) { %> selected <% } %>> Crayfish </option>
+                            <option value="4" <% if (next_win === 4) { %> selected <% } %>> Sea Fish </option>
+                            <option value="5" <% if (next_win === 5) { %> selected <% } %>> Meat </option>
+                            <option value="6" <% if (next_win === 6) { %> selected <% } %>> Cherry </option>
+                            <option value="7" <% if (next_win === 7) { %> selected <% } %>> Orange </option>
+                            <option value="8" <% if (next_win === 8) { %> selected <% } %>> Banana </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Win Rate</h6>
+                    
+                    <div class="small-big">
+                        <p style="color: #b1b1b1;" class="form-label">Win proccess about 5x</p>
+                        <br>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Low win (1 - <%= change_low %>)</label>
+                            <input type="text" class="form-control" name="change_low" value="<%= change_low %>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Mid win (<%= change_low+1 %> - <%= change_mid %>)</label>
+                            <input type="text" class="form-control" name="change_mid" value="<%= change_mid %>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">High win (<%= change_mid+1 %> - 1000)</label>
+                            <input type="text" class="form-control" name="change_high" value="<%= change_high %>" disabled>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">5x win change (1 - <%= win5x %>)</label>
+                        <input type="text" class="form-control" name="win5x" value="<%= win5x %>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">10x burger change (<%= win5x+1 %> - <%= win10x %>)</label>
+                        <input type="text" class="form-control" name="win10x" value="<%= win10x %>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">15x Crayfish change (<%= win10x+1 %> - <%= win15x %>)</label>
+                        <input type="text" class="form-control" name="win15x" value="<%= win15x %>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">25x Sea Fish change (<%= win15x+1 %> - <%= win25x %>)</label>
+                        <input type="text" class="form-control" name="win25x" value="<%= win25x %>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">45x Meat change (<%= win25x+1 %> - 1000)</label>
+                        <input type="text" class="form-control" name="win45x" value="1000" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-secondary rounded-top p-4 mt-2 mb-5">
+            <button type="submit" class="btn btn-primary">Confirmed</button>
+        </div>
+    </form>
+
+
+        
+
+</div>
+<!-- Form End -->
+
+
+<%- include('../includes/footer') %>

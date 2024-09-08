@@ -11,15 +11,19 @@ require('dotenv').config();
 
 // Session configuration
 app.use(session({
-    secret: 'your-secret-key', // Replace with a strong secret
+    secret: 'D6TSRSG52HS7',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Set to true if using HTTPS
+    cookie: { secure: false }
 }));
-
 app.use(flash());
 
-// static file path 
+// **CORS Middleware comes before serving static files**
+app.use(cors({
+    origin: process.env.FRONTEND_URL
+}));
+
+// Serve static files after CORS middleware
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set the view engine to ejs
@@ -31,49 +35,46 @@ app.use(express.urlencoded({ extended: false }));
 // Set up Socket.io with CORS options
 const io = socketIo(server, {
     cors: {
-        origin: process.env.FRONTEND_URL, // Your frontend URL
+        origin: process.env.FRONTEND_URL,
         methods: ["GET", "POST"],
         allowedHeaders: ["my-custom-header"],
         credentials: true
     }
 });
 
-
 /*
 ===========================
     Fish Games Start
 ===========================
 */
-const JiliFishService = require('./service/JiliFishService');
-const jiliFishRoutes = require('./routes/JiliFish');
-app.use('/jili-fish', jiliFishRoutes);
-JiliFishService(io);
+// const JiliFishService = require('./service/JiliFishService');
+// const jiliFishRoutes = require('./routes/JiliFish');
+// app.use('/jili-fish', jiliFishRoutes);
+// JiliFishService(io);
 /*
 ===========================
     Fish Games END
 ===========================
 */
 
-
 /*
 ===========================
     Ludo Game Start
 ===========================
 */
-const JiliLusoService = require('./service/JiliLudoService');
-const ludoRoutes = require('./routes/ludo');
-app.use('/ludo', ludoRoutes);
-JiliLusoService(io);
+// const JiliLusoService = require('./service/JiliLudoService');
+// const ludoRoutes = require('./routes/ludo');
+// app.use('/ludo', ludoRoutes);
+// JiliLusoService(io);
 /*
 ===========================
     Ludo Game END
 ===========================
 */
 
-
 /*
 ===========================
-    ADMIN PANEL Start
+    GREADY PANEL Start
 ===========================
 */
 const GreadyService = require('./service/GreadyService');
@@ -82,10 +83,9 @@ app.use('/gready', GreadyRoutes);
 GreadyService(io);
 /*
 ===========================
-    ADMIN PANEL END
+    GREADY PANEL END
 ===========================
 */
-
 
 /*
 ===========================
@@ -100,10 +100,10 @@ app.use('/admin', admin);
 ===========================
 */
 
-
 app.get('/', (req, res) => {
     res.render('games/index');
 });
-server.listen(3000, () => {
-    console.log('Server listening on port 3000');
+
+server.listen(3001, () => {
+    console.log('Server listening on port 3001');
 });

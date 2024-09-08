@@ -16,32 +16,32 @@ module.exports = {
       {
         name: 'User 1',
         amount: 10000,
-        image: 'user1.png',
+        image: 'http://localhost:3000/assets/general/users/user1.png',
         role: 0
       },{
         name: 'User 2',
         amount: 10000,
-        image: 'user2.png',
+        image: 'http://localhost:3000/assets/general/users/user2.png',
         role: 0
       },{
         name: 'User 3',
         amount: 10000,
-        image: 'user3.png',
+        image: 'http://localhost:3000/assets/general/users/user3.png',
         role: 0
       },{
         name: 'User 4',
         amount: 10000,
-        image: 'user4.png',
+        image: 'http://localhost:3000/assets/general/users/user4.png',
         role: 0
       },{
         name: 'User 5',
         amount: 10000,
-        image: 'user5.png',
+        image: 'http://localhost:3000/assets/general/users/user5.png',
         role: 0
       },{
         name: 'Admin',
         amount: 1000000000,
-        image: 'admin.png',
+        image: 'http://localhost:3000/assets/general/users/user1.png',
         username: 'vudoolive',
         password: '00000000',
         role: 1
