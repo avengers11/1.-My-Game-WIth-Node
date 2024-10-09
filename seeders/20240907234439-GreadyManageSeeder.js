@@ -16,7 +16,7 @@ module.exports = {
     await queryInterface.bulkInsert('gready_manages', [{
       favicon: 'favicon.png',
       logo: 'logo.png',
-      game_mod: true,
+      game_mod: 1,
       game_status: true,
 
       change_low: 800,

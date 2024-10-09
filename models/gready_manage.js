@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   gready_manage.init({
     favicon: DataTypes.STRING,
     logo: DataTypes.STRING,
-    game_mod: DataTypes.BOOLEAN,
+    game_mod: DataTypes.INTEGER,
     game_status: DataTypes.BOOLEAN,
     next_win: DataTypes.INTEGER,
 
@@ -29,6 +29,8 @@ module.exports = (sequelize, DataTypes) => {
     win15x: DataTypes.INTEGER,
     win25x: DataTypes.INTEGER,
     win45x: DataTypes.INTEGER,
+
+    rtp: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'gready_manage',

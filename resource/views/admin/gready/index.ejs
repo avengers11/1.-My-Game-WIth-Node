@@ -10,18 +10,23 @@
                 <div class="bg-secondary rounded h-100 p-4">
                     <h6 class="mb-4">General Settings</h6>
                     
-                    <div class="form-check form-switch">
+                    <div class="form-check form-switch mb-3">
                         <input class="form-check-input" type="checkbox" role="switch" id="game_status" name="game_status" <% if (game_status) { %> checked <% } %>>
                         <label class="form-check-label" for="game_status">Game start</label>
                     </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="game_mod" name="game_mod" <% if (game_mod) { %> checked <% } %>>
-                        <label class="form-check-label" for="game_mod"> Game mode auto</label>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Game mode auto</label>
+                        <select class="form-select mb-3" name="game_mod" id="game_mod">
+                            <option value="1" <% if (game_mod === 1) { %> selected <% } %>> Auto </option>
+                            <option value="2" <% if (game_mod === 2) { %> selected <% } %>> Manual </option>
+                            <option value="3" <% if (game_mod === 3) { %> selected <% } %>> RTP </option>
+                        </select>
                     </div>
                    
                     <hr>
 
-                    <div class="mb-3">
+                    <div class="mb-3" id="next-win">
                         <label for="exampleInputEmail1" class="form-label">Next win</label>
                         <select class="form-select mb-3" name="next_win">
                             <option value="1" <% if (next_win === 1) { %> selected <% } %>> Strawberry </option>
@@ -40,8 +45,13 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-secondary rounded h-100 p-4">
                     <h6 class="mb-4">Win Rate</h6>
-                    
-                    <div class="small-big">
+
+                    <div class="mb-3" id="rtp-win">
+                        <label for="" class="form-label">RTP</label>
+                        <input type="text" class="form-control" name="rtp" value="<%= rtp %>">
+                    </div>
+
+                    <div class="small-big auto-win">
                         <p style="color: #b1b1b1;" class="form-label">Win proccess about 5x</p>
                         <br>
                         <div class="mb-3">
@@ -58,27 +68,27 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 auto-win">
                         <label for="" class="form-label">5x win change (1 - <%= win5x %>)</label>
                         <input type="text" class="form-control" name="win5x" value="<%= win5x %>">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 auto-win">
                         <label for="" class="form-label">10x burger change (<%= win5x+1 %> - <%= win10x %>)</label>
                         <input type="text" class="form-control" name="win10x" value="<%= win10x %>">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 auto-win">
                         <label for="" class="form-label">15x Crayfish change (<%= win10x+1 %> - <%= win15x %>)</label>
                         <input type="text" class="form-control" name="win15x" value="<%= win15x %>">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 auto-win">
                         <label for="" class="form-label">25x Sea Fish change (<%= win15x+1 %> - <%= win25x %>)</label>
                         <input type="text" class="form-control" name="win25x" value="<%= win25x %>">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 auto-win">
                         <label for="" class="form-label">45x Meat change (<%= win25x+1 %> - 1000)</label>
                         <input type="text" class="form-control" name="win45x" value="1000" disabled>
                     </div>
@@ -92,10 +102,32 @@
     </form>
 
 
-        
+    <script>
+        // game_mod
+        $("#game_mod").change(function(){
+            gameMode();
+        });
+        const gameMode = () => {
+            let mode = $("#game_mod").val();
+            if(mode == 1){
+                $("#rtp-win").addClass("d-none");
+                $(".auto-win").removeClass("d-none");
+                $("#next-win").addClass("d-none");
+            }else if(mode == 2){
+                $("#rtp-win").addClass("d-none");
+                $(".auto-win").addClass("d-none");
+                $("#next-win").removeClass("d-none");
+            }else{
+                $("#rtp-win").removeClass("d-none");
+                $(".auto-win").addClass("d-none");
+                $("#next-win").addClass("d-none");
+            }
+        }
+        gameMode();
+    </script>
 
 </div>
 <!-- Form End -->
 
-
 <%- include('../includes/footer') %>
+<script src="/script/gready.js"></script>

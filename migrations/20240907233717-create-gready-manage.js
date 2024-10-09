@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       game_mod: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.INTEGER
       },
       game_status: {
         type: Sequelize.BOOLEAN
@@ -46,6 +46,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       win45x: {
+        type: Sequelize.INTEGER
+      },
+      rtp: {
         type: Sequelize.INTEGER
       },
       createdAt: {

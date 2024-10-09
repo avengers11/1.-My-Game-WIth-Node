@@ -1,13 +1,4 @@
-const { Ludo_Manage, gready_manage } = require('../models');
-
-// Ludo_Manage
-let ludoManage = null;
-async function refreshLudoManage(){
-    ludoManage = await Ludo_Manage.findByPk(1);
-}
-if(ludoManage == null){
-    ludoManage = Ludo_Manage.findByPk(1);
-}
+const { gready_manage } = require('../models');
 
 // gready_manage
 let GreadyManage = null;
@@ -22,10 +13,6 @@ async function initializeGreadyManage() {
 }
 
 module.exports = {
-    // Ludo_Manage
-    ludoManage,
-    refreshLudoManage,
-
     // GreadyManage
     GreadyManage: async function() {
         await initializeGreadyManage();

@@ -1,5 +1,5 @@
 const { User } = require('../models');
-const { GreadyManage, refreshGreadyManage } = require('../service/global');
+const { GreadyManage } = require('../service/global');
 
 // Initialize Socket.io namespace and setup
 async function setupSocket(io) {
@@ -13,26 +13,41 @@ async function setupSocket(io) {
     var battingUsersUndersThisBoard = [];
     var allAmountUndersThisBoard = [{ amount: 0, board: 1 },{ amount: 0, board: 8 },{ amount: 0, board: 7 },{ amount: 0, board: 6 }];
     var winnerUsersUndersThisBoard = [];
+    var posibleRewards = [{ amount: 0, win_rate: 5 }, { amount: 0, win_rate: 10 }, { amount: 0, win_rate: 15 }, { amount: 0, win_rate: 25 }, { amount: 0, win_rate: 45 }, { amount: 0, win_rate: 5}, { amount: 0, win_rate: 5 }, { amount: 0, win_rate: 5 }];
+    var totalBetRewards = [];
+
+    // config 
+    var botsConfig = "";
 
     let timer = 20;
     async function startTimer() {
-        
+        botsConfig = generateRandomConfig();
         
         setInterval(async () => {
+            greadyManageDataValues = await GreadyManage();
             if (timer > 0) {
                 timer--;
+
+                // betting time 
+                if(timer > 0  && timer < 11){
+                    autoBot(timer);
+                }
+
             } else {
                 timer = 20;
 
                 // winning process 
                 const winners = await winningProcess();
-                
                 // rewards proccess 
                 const rewardUsers = rewardsProcess(winners);
+
+                botsConfig = generateRandomConfig();
                 
+                // reset posible winners 
+                posibleRewards = [{ amount: 0, win_rate: 5 }, { amount: 0, win_rate: 10 }, { amount: 0, win_rate: 15 }, { amount: 0, win_rate: 25 }, { amount: 0, win_rate: 45 }, { amount: 0, win_rate: 5}, { amount: 0, win_rate: 5 }, { amount: 0, win_rate: 5 }]
+
                 greadyIo.emit('greadyWinnersData',  {winners, winnersFruits, rewardUsers});
             }
-
             console.log("gready: " + timer);
             
 
@@ -42,7 +57,6 @@ async function setupSocket(io) {
     startTimer();
 
     // winningProcess
-    await winningProcess();
     async function winningProcess() {
         greadyManageDataValues = await GreadyManage();
         const randomNumber = Math.floor(Math.random() * 1000) + 1;
@@ -50,10 +64,30 @@ async function setupSocket(io) {
 
         // check mode 
         let calculationBoardNumber = "";
-        if(greadyManageDataValues.game_mod == 0){
+        
+        // menuall 
+        if(greadyManageDataValues.game_mod == 2){
             calculationBoardNumber = Number(greadyManageDataValues.next_win);
-        }else{
-            // calculationBoardNumber = Math.floor(Math.random() * 8);
+        }
+
+        // rtp process 
+        else if(greadyManageDataValues.game_mod == 3){
+            let { totalBetAmount, totalWinAmount } = totalBetRewards.reduce((accumulator, current) => {
+                accumulator.totalBetAmount += current.bet;
+                accumulator.totalWinAmount += current.win;
+                return accumulator;
+            }, { totalBetAmount: 0, totalWinAmount: 0 });
+            let rtp = greadyManageDataValues.rtp;
+            
+            let possibleWinners = posibleRewards.map(item => item.amount);
+            if(possibleWinners.every(amount => amount === possibleWinners[0])){
+                calculationBoardNumber = Math.floor(Math.random() * 8) + 1;
+            }else{
+                calculationBoardNumber = findBestWin(totalBetAmount, totalWinAmount, rtp, possibleWinners);
+            }
+        }
+
+        else{
             if(randomNumber > greadyManageDataValues.win5x &&  randomNumber <= greadyManageDataValues.win10x){
                 calculationBoardNumber = 2;
             }else if(randomNumber > greadyManageDataValues.win10x &&  randomNumber <= greadyManageDataValues.win15x ){
@@ -87,14 +121,14 @@ async function setupSocket(io) {
         }
 
         const boardNumber = {
-            "1.26": 1,
-            "1.24": 2,
-            "1.01": 3,
-            "1.04": 4,
-            "0.48": 5,
-            "0.51": 6,
-            "0.55": 7,
-            "0.58": 8
+            "1.1": 1,
+            "1.2": 2,
+            "1.3": 3,
+            "1.4": 4,
+            "1.5": 5,
+            "1.6": 6,
+            "1.7": 7,
+            "1.8": 8
         };
         const randomKey = Object.keys(boardNumber)[Number(calculationBoardNumber-1)];        
         const randomValue = boardNumber[randomKey];
@@ -117,30 +151,55 @@ async function setupSocket(io) {
         if (winnersFruits.length > 20) {
             winnersFruits.pop();
         }
-
-        console.log({
-            "calculationBoardNumber": calculationBoardNumber,
-            "randomKey": randomKey,
-            "randomValue": randomValue,
-            "winRate": winRate,
-            "randomNumber": randomNumber,
-            "randomNumber2": randomNumber2,
-        });
     
+        console.log(randomValue);
         return {
             frame: randomKey,
             board: randomValue,
             winRate: winRate
         };
     }
-    
+    function findBestWin(totalBetAmount, totalWinAmount, rtp, possibleWinners) {
+        var ptr = rtp;
+        var totalBet = totalBetAmount;
+        var totalWin = totalWinAmount;
+        var winArray = possibleWinners;
+  
+        // Initialize the results container
+        var closestPTR = 0;
+        var bestWin = 0;
+        if (totalBet < totalWin) {
+          bestWin = Math.min(...winArray);
+          closestPTR = (totalWin + bestWin) / totalBet;
+        }else{
+          var targetPTR = ptr / 100;
+          winArray.forEach(function(win) {
+              var newTotalWin = totalWin + win;
+              var newPTR = (newTotalWin / totalBet);
+              if (Math.abs(newPTR - targetPTR) < Math.abs(closestPTR - targetPTR)) {
+                closestPTR = newPTR;
+                bestWin = win;
+              }
+          });
+        }
+        // board number 
+        let board_number = winArray.indexOf(bestWin)+1;
+        return board_number;
+      }
 
     // rewardsProcess
     function rewardsProcess(winners) {
+        let totalBet = 0;
+        let totalRewards = 0;
+
         winnerUsersUndersThisBoard = [];
         battingUsersUndersThisBoard.forEach((curE) => {
+            totalBet = totalBet + curE.amount;
+            
             if (curE.board === winners.board) {
                 let winAmount = curE.amount * winners.winRate;
+                totalRewards = totalRewards + winAmount;
+
                 winnerUsersUndersThisBoard.push({
                     "amount": curE.amount,
                     "win": winAmount,
@@ -149,12 +208,15 @@ async function setupSocket(io) {
                     "image": curE.image,
                     "userId": curE.userId
                 });
-
                 // cal 
                 betsCalculation(curE.userId, winAmount);
             }
         });
-    
+
+        totalBetRewards.push({"bet": totalBet, "win": totalRewards});
+        if (totalBetRewards.length > 3) {
+            totalBetRewards.shift();
+        }
         // Reset old data
         battingUsersUndersThisBoard = [];
         allAmountUndersThisBoard = [{ amount: 0, board: 1 },{ amount: 0, board: 8 },{ amount: 0, board: 7 },{ amount: 0, board: 6 }];
@@ -179,17 +241,105 @@ async function setupSocket(io) {
     async  function getUserInfo(userId) {
         // try {
         //     const user = await User.findByPk(userId);
-        //     console.log(user);
         // } catch (error) {
         //     console.error('Error fetching user:', error);
         //     return false;
         // }
     }
 
+    // autoBot 
+    function autoBot(time) {
+        let tetsConf = botsConfig;
+        if(botsConfig == ""){
+            return false;
+        }
+    
+        if (tetsConf.times.includes(time)) {
+            let selectedBet = tetsConf.bets[time];
+            let interval = 1000 / Object.keys(selectedBet).length;
+    
+            Object.keys(selectedBet).forEach((key, index) => {
+                let [coin, quantity] = selectedBet[key];
+                let amountInt = tetsConf.coinValues[coin];
+    
+                for (let i = 1; i <= quantity; i++) {
+                    setTimeout(() => {
+                        let { randomX, randomY } = getRandomPositionForBoard(key);
+                        let coinData = { coin, randomX, randomY };
+    
+                        greadyIo.emit("greadyShowBets", { coinData, amountInt });
+                    }, interval * index * i);
+                }
+            });
+        }
+    }
+    function getRandomPositionForBoard(board) {
+        let positions = {
+            "1": { minX: 151, maxX: 222, minY: 99, maxY: 78 },
+            "2": { minX: 300, maxX: 368, minY: 177, maxY: 155 },
+            "3": { minX: 464, maxX: 532, minY: 109, maxY: 87 },
+            "4": { minX: 535, maxX: 600, minY: -60, maxY: -36 }, 
+            "5": { minX: 482, maxX: 550, minY: -220, maxY: -198 },
+            "6": { minX: 298, maxX: 367, minY: -277, maxY: -254  },
+            "7": { minX: 142, maxX: 213, minY: -204, maxY: -180       },
+            "8": { minX: 124, maxX: 191, minY: -55, maxY: -35 }
+        };
+        let position = positions[board] || positions["8"];
+        let randomX = getRandomInRange(position.minX, position.maxX);
+        let randomY = getRandomInRange(position.minY, position.maxY);
+        return { randomX, randomY };
+    }
+    function getRandomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+    function generateRandomConfig() {
+        let max_time_bets = 4;
+        let max_board = 8;
+        let max_coins = 4;
+
+
+        // Random number of times (1 to max_time_bets)
+        let random_times = [];
+        let random_bets = {};
+        let coin_values = {
+            1: 500,
+            2: 1000,
+            3: 10000,
+            4: 50000
+        };
+
+        let time_count = Math.floor(Math.random() * max_time_bets) + 1;
+        for (let i = 0; i < time_count; i++) {
+            let time = Math.floor(Math.random() * 9) + 2;
+            random_times.push(time);
+        }
+    
+        // Remove duplicates from random_times
+        random_times = [...new Set(random_times)];
+    
+        random_times.forEach(time => {
+            let board_count = Math.floor(Math.random() * max_board) + 1; // Random boards for each time
+            random_bets[time] = {};
+    
+            for (let j = 0; j < board_count; j++) {
+                let board = Math.floor(Math.random() * max_board) + 1;
+                let coin = Math.floor(Math.random() * max_coins) + 1; // Random coin between 1 and 4
+                let quantity = Math.floor(Math.random() * 4) + 1; // Random quantity between 1 and 4
+                random_bets[time][board] = [coin, quantity];
+            }
+        });
+    
+        let random_config = {
+            times: random_times,
+            bets: random_bets,
+            coinValues: coin_values
+        };
+
+        return random_config;
+    }
 
     // manageDataOnConnect 
     greadyIo.on("greadyManageDataUpdate", (data) => {
-        console.log(data);
     });
 
     // socket on connect 
@@ -211,19 +361,7 @@ async function setupSocket(io) {
 
             // submit user 
             allActiveUsers.push(userData);
-            const remainingSlots = 5 - allActiveUsers.length;
-            for (let i = 0; i < remainingSlots; i++) {
-                allActiveUsers.push({
-                    "userAmount": 0,
-                    "board": 1,
-                    "userName": "NO ONE WIN",
-                    "userImage": "http://localhost:3000/assets/general/no-users.jpg",
-                    "userId": 1,
-                    "socket_id": 'testing',
-                });
-            }
             allActiveUsers.sort((a, b) => b.userAmount - a.userAmount);
-            console.log(allActiveUsers);
 
             greadyIo.emit("greadyActiveUsersShow", {allActiveUsers, winnersFruits});
         });
@@ -271,6 +409,9 @@ async function setupSocket(io) {
             // cal 
             betsCalculation(userId, -amountInt);
 
+            // possible rewards array 
+            posibleRewards[boardInt-1].amount = posibleRewards[boardInt-1].amount + (amountInt*posibleRewards[boardInt-1].win_rate);
+
             greadyIo.emit("greadyShowBets", {coinData, amountInt});
         });
 
@@ -279,8 +420,6 @@ async function setupSocket(io) {
             if (index !== -1) {
                 allActiveUsers.splice(index, 1);
                 greadyIo.emit('greadyActiveUsersShow', {allActiveUsers});
-
-                console.log(allActiveUsers);
             }
         });
     });

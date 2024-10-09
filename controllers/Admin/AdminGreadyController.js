@@ -22,8 +22,8 @@ const greadyIo = io.of('gready');
 ===================
 */
 exports.index = async (req, res) => {
-    const { dataValues: { game_mod, game_status, next_win, change_low, change_mid, change_high, win5x, win10x, win15x, win25x, win45x } } = await gready_manage.findByPk(1);
-    res.render('admin/gready/index', {game_mod, game_status, next_win, change_low, change_mid, change_high, win5x, win10x, win15x, win25x, win45x });
+    const { dataValues: { game_mod, game_status, next_win, change_low, change_mid, change_high, win5x, win10x, win15x, win25x, win45x, rtp } } = await gready_manage.findByPk(1);
+    res.render('admin/gready/index', {game_mod, game_status, next_win, change_low, change_mid, change_high, win5x, win10x, win15x, win25x, win45x, rtp });
 };
 
 /*
@@ -33,7 +33,7 @@ exports.index = async (req, res) => {
 */
 exports.manageData = async (req, res) => {
     try {
-        const { game_mod, game_status, next_win, change_low, change_mid, change_high, win5x, win10x, win15x, win25x, win45x } = req.body;
+        const { game_mod, game_status, next_win, change_low, change_mid, change_high, win5x, win10x, win15x, win25x, win45x, rtp } = req.body;
 
         // Find the record to update
         const Manage = await gready_manage.findByPk(1);
@@ -42,7 +42,7 @@ exports.manageData = async (req, res) => {
         }
 
         // Update fields
-        Manage.game_mod = game_mod === "on" ? 1 : 0;
+        Manage.game_mod = game_mod;
         Manage.game_status = game_status === "on" ? 1 : 0;
         Manage.next_win = next_win ? parseInt(next_win, 10) : Manage.next_win;
 
@@ -55,6 +55,8 @@ exports.manageData = async (req, res) => {
         Manage.win15x = win15x ? parseInt(win15x, 10) : Manage.win15x;
         Manage.win25x = win25x ? parseInt(win25x, 10) : Manage.win25x;
         Manage.win45x = win45x ? parseInt(win45x, 10) : Manage.win45x;
+
+        Manage.rtp = rtp ? parseInt(rtp, 10) : Manage.rtp;
 
         // Save the updated record
         await Manage.save();
